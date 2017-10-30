@@ -3,7 +3,7 @@ Introduction to ROS packages, catkin_workspace, nodes, Publisher and Subscriber
 
 ## Standard install via command-line
 ```
-mkdir ~/catkin_ws/src
+mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 git clone https://github.com/rishabh1b/beginner_tutorials/
 catkin_init_workspace
@@ -35,3 +35,4 @@ rosrun beginner_tutorials listener
 
 ## Dependencies
 1. ROS Kinetic. This can be downloaded by following the steps [here](http://wiki.ros.org/kinetic/Installation).
+2. CMake. This can be downloaded from [here](https://cmake.org/download/)
