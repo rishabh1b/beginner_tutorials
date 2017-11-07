@@ -48,6 +48,22 @@ int main(int argc, char **argv) {
    */
   ros::NodeHandle n;
 
+  /**
+   * Initializing some parameters that can set through command line or launch file
+   */
+   int rate;
+   std::string topic;
+
+  /** 
+   * Initialize node parameters from launch file or command line.
+   * Use a private node handle so that multiple instances of the node can
+   * be run simultaneously while using different parameters.
+   */
+
+  ros::NodeHandle private_node_handle_("~");
+  private_node_handle_.param("rate", rate, int(40));
+  private_node_handle_.param("topic", topic, std::string("chatter"));
+
   ros::ServiceServer service_1 = n.advertiseService("changeString", changeString);
   ROS_INFO("String Replacing Service is now being provided");
 
@@ -69,9 +85,9 @@ int main(int argc, char **argv) {
    * buffer up before throwing some away.
    */
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
-      > ("chatter", 1000);
+      > (topic, 1000);
 
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(rate);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -88,7 +104,7 @@ int main(int argc, char **argv) {
     ss << curr_pub_string << count;
     msg.data = ss.str();
 
-    ROS_INFO("%s", msg.data.c_str());
+    // ROS_INFO("%s", msg.data.c_str());
 
     /**
      * The publish() function is how you send messages. The parameter

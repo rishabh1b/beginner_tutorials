@@ -4,6 +4,7 @@
  * @copyright MIT license (c) Rishabh Biyani 2017
  */
 
+#include <string>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
@@ -35,6 +36,14 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   /**
+   * Initializing some parameters that can set through command line or launch file
+   */
+   std::string topic;
+
+  // Initializing topic in a private namespace
+  ros::NodeHandle private_node_handle_("~");
+  private_node_handle_.param("topic", topic, std::string("chatter"));
+  /**
    * The subscribe() call is how you tell ROS that you want to receive messages
    * on a given topic.  This invokes a call to the ROS
    * master node, which keeps a registry of who is publishing and who
@@ -49,7 +58,7 @@ int main(int argc, char **argv) {
    * is the number of messages that will be buffered up before beginning to throw
    * away the oldest ones.
    */
-  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+  ros::Subscriber sub = n.subscribe(topic, 1000, chatterCallback);
 
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
