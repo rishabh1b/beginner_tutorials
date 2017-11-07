@@ -5,8 +5,25 @@
  */
 
 #include <sstream>
+#include <ros/console.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/StringService.h"
+#include "beginner_tutorials/replaceString.h"
+
+
+void replacePublishedString(std::string str) {
+   curr_pub_string = str;
+}
+
+bool changeString(beginner_tutorials::replaceString::Request  &req,
+          beginner_tutorials::replaceString::Response &res) {
+
+replacePublishedString(req.request_string);
+res.return_string = "The string is now changed to " + req.request_string;
+ROS_DEBUG("The output string just changed");
+return true;
+}
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
@@ -30,6 +47,9 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
+
+  ros::ServiceServer service_1 = n.advertiseService("changeString", changeString);
+  ROS_INFO("String Replacing Service is now being provided");
 
   /**
    * The advertise() function is how you tell ROS that you want to
@@ -65,7 +85,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Rishabh Biyani" << count;
+    ss << curr_pub_string << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
