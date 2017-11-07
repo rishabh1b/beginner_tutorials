@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   /**
-   * Initializing some parameters that can set through command line or launch file
+   * Initializing some parameters that can be set through command line or launch file
    */
    std::string topic;
 
@@ -59,6 +59,15 @@ int main(int argc, char **argv) {
    * away the oldest ones.
    */
   ros::Subscriber sub = n.subscribe(topic, 1000, chatterCallback);
+
+  // Inform the user about the success or failure to subscription of the topic
+  if (sub) {
+    ROS_DEBUG("Subscribed to topic successful");
+  } else {
+    ROS_FATAL(
+        "Failed to subscribe to the topic. Shutting down listener");
+    return -1;
+  }
 
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
