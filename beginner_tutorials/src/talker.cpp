@@ -11,9 +11,20 @@
 #include "beginner_tutorials/StringService.h"
 #include "beginner_tutorials/replaceString.h"
 
+/**
+* @brief method to replace the string being published
+* @param a string to be replaced
+*/
+
 void replacePublishedString(std::string str) {
   curr_pub_string = str;
 }
+
+/**
+* @brief service function which entertains the string changing calls
+* @param Request is a type dependent of the service being used
+* @return a boolean indicating whether service was completed correctly
+*/
 
 bool changeString(beginner_tutorials::replaceString::Request &req,
                   beginner_tutorials::replaceString::Response &res) {
