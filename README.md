@@ -11,7 +11,7 @@ cd ~/catkin_ws
 catkin_make
 ```
 ## Running Instructions
-Terminal 1-
+For running the talker and subcriber node together, launch the ```demo.launch``` file in Terminal 1 -
 ```
 cd ~/catkin_ws
 source devel/setup.bash
