@@ -1,0 +1,16 @@
+<launch>
+
+<arg name="publish_rate"           default="10"/>
+<arg name="topic_name"  default="chatter"/>
+
+<node pkg = "beginner_tutorials" name = "talker" type = "talker" output="screen">
+	<param name="rate"              value="$(arg publish_rate)"/>
+	<param name="topic"              value="$(arg topic_name)"/>
+</node>
+
+<node pkg = "beginner_tutorials" name = "listener" type = "listener" output="screen">
+        <param name="topic"              value="$(arg topic_name)"/>
+</node>
+
+</launch>
+

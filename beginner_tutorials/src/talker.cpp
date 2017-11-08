@@ -5,8 +5,34 @@
  */
 
 #include <sstream>
+#include "ros/console.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/StringService.h"
+#include "beginner_tutorials/replaceString.h"
+
+/**
+* @brief method to replace the string being published
+* @param a string to be replaced
+*/
+
+void replacePublishedString(std::string str) {
+  curr_pub_string = str;
+}
+
+/**
+* @brief service function which entertains the string changing calls
+* @param Request is a type dependent of the service being used
+* @return a boolean indicating whether service was completed correctly
+*/
+
+bool changeString(beginner_tutorials::replaceString::Request &req,
+                  beginner_tutorials::replaceString::Response &res) {
+  replacePublishedString(req.request_string);
+  res.return_string = "The string is now changed to " + req.request_string;
+  ROS_WARN("The output string just changed");
+  return true;
+}
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
@@ -32,6 +58,26 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   /**
+   * Initializing some parameters that can set through command line or launch file
+   */
+  int rate;
+  std::string topic;
+
+  /**
+   * Initialize node parameters from launch file or command line.
+   * Use a private node handle so that multiple instances of the node can
+   * be run simultaneously while using different parameters.
+   */
+
+  ros::NodeHandle private_node_handle_("~");
+  private_node_handle_.param("rate", rate, static_cast<int>(40));
+  private_node_handle_.param("topic", topic, std::string("chatter"));
+
+  ros::ServiceServer service_1 = n.advertiseService("changeString",
+                                                    changeString);
+  ROS_INFO("String Replacing Service is now being provided");
+
+  /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
    * master node, which keeps a registry of who is publishing and who
@@ -48,10 +94,9 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher chatter_pub = n.advertise < std_msgs::String
-      > ("chatter", 1000);
+  ros::Publisher chatter_pub = n.advertise < std_msgs::String > (topic, 1000);
 
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(rate);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -65,10 +110,10 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Rishabh Biyani" << count;
+    ss << curr_pub_string << count;
     msg.data = ss.str();
 
-    ROS_INFO("%s", msg.data.c_str());
+    // ROS_INFO("%s", msg.data.c_str());
 
     /**
      * The publish() function is how you send messages. The parameter
@@ -86,3 +131,4 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+
