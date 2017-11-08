@@ -1,5 +1,5 @@
 # beginner_tutorials
-Introduction to ROS packages, catkin_workspace, nodes, Publisher and Subscriber
+Introduction to ROS packages, catkin_workspace, nodes, Publisher and Subscriber, Service and Clients
 
 ## Standard install via command-line
 ```
@@ -15,21 +15,27 @@ Terminal 1-
 ```
 cd ~/catkin_ws
 source devel/setup.bash
-roscore
+roslaunch beginner_tutorials demo.launch
 
 ```
-Terminal 2-
+or with optional arguments
+```
+roslaunch beginner_tutorials demo.launch publish_rate:=10 topic_name:=chatter
+
+```
+For calling the service run the following command in Terminal 2-
 ```
 cd ~/catkin_ws
 source devel/setup.bash
-rosrun beginner_tutorials talker
+rosservice call /changeString "808XCourse"
+```
+For running rqt_console and rqt_logger, run the following commands in separate terminals
+```
+rosrun rqt_logger_level rqt_logger_level
 
 ```
-Terminal 3-
 ```
-cd ~/catkin_ws
-source devel/setup.bash
-rosrun beginner_tutorials listener
+rosrun rqt_console rqt_console
 
 ```
 
