@@ -19,7 +19,7 @@ bool changeString(beginner_tutorials::replaceString::Request &req,
                   beginner_tutorials::replaceString::Response &res) {
   replacePublishedString(req.request_string);
   res.return_string = "The string is now changed to " + req.request_string;
-  ROS_DEBUG("The output string just changed");
+  ROS_WARN("The output string just changed");
   return true;
 }
 
