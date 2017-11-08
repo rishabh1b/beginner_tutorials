@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
   /**
    * Initializing some parameters that can be set through command line or launch file
    */
-   std::string topic;
+  std::string topic;
 
   // Initializing topic in a private namespace
   ros::NodeHandle private_node_handle_("~");
@@ -64,8 +64,7 @@ int main(int argc, char **argv) {
   if (sub) {
     ROS_DEBUG("Subscribed to topic successful");
   } else {
-    ROS_FATAL(
-        "Failed to subscribe to the topic. Shutting down listener");
+    ROS_FATAL("Failed to subscribe to the topic. Shutting down listener");
     return -1;
   }
 
@@ -78,3 +77,4 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+

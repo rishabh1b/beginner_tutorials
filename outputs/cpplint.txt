@@ -1,4 +1,6 @@
-Done processing ./beginner_tutorials/src/talker.cpp
-Done processing ./beginner_tutorials/src/listener.cpp
-Total errors found: 0
+./src/beginner_tutorials/src/talker.cpp:18:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::replaceString::Request &req  [runtime/references] [2]
+./src/beginner_tutorials/src/talker.cpp:19:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::replaceString::Response &res  [runtime/references] [2]
+Done processing ./src/beginner_tutorials/src/talker.cpp
+Done processing ./src/beginner_tutorials/src/listener.cpp
+Total errors found: 2
 

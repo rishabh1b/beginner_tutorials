@@ -5,24 +5,22 @@
  */
 
 #include <sstream>
-#include <ros/console.h>
+#include "ros/console.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/StringService.h"
 #include "beginner_tutorials/replaceString.h"
 
-
 void replacePublishedString(std::string str) {
-   curr_pub_string = str;
+  curr_pub_string = str;
 }
 
-bool changeString(beginner_tutorials::replaceString::Request  &req,
-          beginner_tutorials::replaceString::Response &res) {
-
-replacePublishedString(req.request_string);
-res.return_string = "The string is now changed to " + req.request_string;
-ROS_DEBUG("The output string just changed");
-return true;
+bool changeString(beginner_tutorials::replaceString::Request &req,
+                  beginner_tutorials::replaceString::Response &res) {
+  replacePublishedString(req.request_string);
+  res.return_string = "The string is now changed to " + req.request_string;
+  ROS_DEBUG("The output string just changed");
+  return true;
 }
 
 /**
@@ -51,20 +49,21 @@ int main(int argc, char **argv) {
   /**
    * Initializing some parameters that can set through command line or launch file
    */
-   int rate;
-   std::string topic;
+  int rate;
+  std::string topic;
 
-  /** 
+  /**
    * Initialize node parameters from launch file or command line.
    * Use a private node handle so that multiple instances of the node can
    * be run simultaneously while using different parameters.
    */
 
   ros::NodeHandle private_node_handle_("~");
-  private_node_handle_.param("rate", rate, int(40));
+  private_node_handle_.param("rate", rate, static_cast<int>(40));
   private_node_handle_.param("topic", topic, std::string("chatter"));
 
-  ros::ServiceServer service_1 = n.advertiseService("changeString", changeString);
+  ros::ServiceServer service_1 = n.advertiseService("changeString",
+                                                    changeString);
   ROS_INFO("String Replacing Service is now being provided");
 
   /**
@@ -84,8 +83,7 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher chatter_pub = n.advertise < std_msgs::String
-      > (topic, 1000);
+  ros::Publisher chatter_pub = n.advertise < std_msgs::String > (topic, 1000);
 
   ros::Rate loop_rate(rate);
 
@@ -122,3 +120,4 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+
