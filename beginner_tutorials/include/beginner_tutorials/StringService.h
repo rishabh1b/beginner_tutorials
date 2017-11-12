@@ -1,7 +1,7 @@
 /**
 * @file StringService.h header file for services that can be provided
 * @author Rishabh Biyani (rishabh1b)
-* @copyright MIIT license (c) Rishabh Biyani 2017
+* @copyright MIT license (c) Rishabh Biyani 2017
 */
 
 #include <string>
