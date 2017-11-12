@@ -1,7 +1,9 @@
 <launch>
 
 <arg name="publish_rate"           default="10"/>
-<arg name="topic_name"  default="chatter"/>
+<arg name="topic_name"             default="chatter"/>
+<arg name = "rec_bag"               default="false"/>
+<arg name = "bag_dur"              default="15"/>
 
 <node pkg = "beginner_tutorials" name = "talker" type = "talker" output="screen">
 	<param name="rate"              value="$(arg publish_rate)"/>
@@ -11,6 +13,11 @@
 <node pkg = "beginner_tutorials" name = "listener" type = "listener" output="screen">
         <param name="topic"              value="$(arg topic_name)"/>
 </node>
+
+<group if="$(arg rec_bag)">
+   <node pkg = "rosbag" type="record" name="record" 
+    args="-a -o ./chatterbag --duration=$(arg bag_dur)" output="screen"/>
+</group>
 
 </launch>
 
