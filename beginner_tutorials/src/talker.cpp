@@ -79,6 +79,7 @@ int main(int argc, char **argv) {
                                                     changeString);
   ROS_INFO("String Replacing Service is now being provided");
 
+  // Create a tf::transform object to be broadcasted
   int omega = 2;
   tf::TransformBroadcaster br;
   tf::Transform transform;
@@ -131,6 +132,7 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+    // Sinusoidally change the origin of the frame and then broadcast
     transform.setOrigin(tf::Vector3(sin(omega * ros::Time::now().toSec()), cos(omega * ros::Time::now().toSec()), 0.0));
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "/world", "/talk"));
 
