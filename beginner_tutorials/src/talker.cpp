@@ -1,11 +1,11 @@
 /*
  * @file talker.cpp
  * @author Rishabh Biyani (rishabh1b)
- * @copyright BSD License (c) Rishabh Biyani
+ * @copyright MIT License (c) Rishabh Biyani
  */
 
-#include <sstream>
 #include <math.h>
+#include <sstream>
 #include "ros/console.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"

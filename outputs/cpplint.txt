@@ -1,6 +1,11 @@
-./src/beginner_tutorials/src/talker.cpp:18:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::replaceString::Request &req  [runtime/references] [2]
-./src/beginner_tutorials/src/talker.cpp:19:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::replaceString::Response &res  [runtime/references] [2]
-Done processing ./src/beginner_tutorials/src/talker.cpp
-Done processing ./src/beginner_tutorials/src/listener.cpp
-Total errors found: 2
+./beginner_tutorials/src/talker.cpp:31:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::replaceString::Request &req  [runtime/references] [2]
+./beginner_tutorials/src/talker.cpp:32:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::replaceString::Response &res  [runtime/references] [2]
+./beginner_tutorials/src/talker.cpp:136:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./beginner_tutorials/src/talker.cpp:137:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+Done processing ./beginner_tutorials/src/talker.cpp
+Done processing ./beginner_tutorials/src/listener.cpp
+./beginner_tutorials/src/test/test_string_service.cpp:18:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./beginner_tutorials/src/test/test_string_service.cpp:28:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+Done processing ./beginner_tutorials/src/test/test_string_service.cpp
+Total errors found: 6
 

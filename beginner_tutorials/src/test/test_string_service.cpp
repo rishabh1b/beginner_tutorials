@@ -1,23 +1,22 @@
 /**
 * @file test_string_service.cpp - file for testing the string service provided by talker node
 * @author Rishabh Biyani(rishabh1b)
-* @copyright MIT License (c) Rishabh Biyani 2017
+* @copyright (c) MIT License Rishabh Biyani 2017
 */
 
-#include <ros/ros.h>
-#include <ros/service_client.h>
+#include "ros/ros.h"
+#include "ros/service_client.h"
 #include "beginner_tutorials/replaceString.h"
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 std::shared_ptr<ros::NodeHandle> nh;
 
 /**
 * @brief gtest function which checks test string service by creating a client
 */
-TEST(StringSuite, changeString)
-{
+TEST(StringSuite, changeString) {
   ros::ServiceClient client = nh->serviceClient<beginner_tutorials::replaceString>(
-	"changeString");
+                              "changeString");
   bool exists(client.waitForExistence(ros::Duration(3)));
 
   EXPECT_TRUE(exists);
@@ -27,7 +26,6 @@ TEST(StringSuite, changeString)
   client.call(srv);
 
   EXPECT_EQ(srv.response.return_string, "The string is now changed to gtestROS");
-
 }
 
 /**
