@@ -1,15 +1,17 @@
 /*
  * @file talker.cpp
  * @author Rishabh Biyani (rishabh1b)
- * @copyright BSD License (c) Rishabh Biyani
+ * @copyright MIT License (c) Rishabh Biyani
  */
 
+#include <math.h>
 #include <sstream>
 #include "ros/console.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/StringService.h"
 #include "beginner_tutorials/replaceString.h"
+#include "tf/transform_broadcaster.h"
 
 /**
 * @brief method to replace the string being published
@@ -77,6 +79,14 @@ int main(int argc, char **argv) {
                                                     changeString);
   ROS_INFO("String Replacing Service is now being provided");
 
+  // Create a tf::transform object to be broadcasted
+  int omega = 2;
+  tf::TransformBroadcaster br;
+  tf::Transform transform;
+  tf::Quaternion q;
+  q.setRPY(0, 0 , M_PI/2);
+  transform.setRotation(q);
+
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -122,6 +132,9 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+    // Sinusoidally change the origin of the frame and then broadcast
+    transform.setOrigin(tf::Vector3(sin(omega * ros::Time::now().toSec()), cos(omega * ros::Time::now().toSec()), 0.0));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "/world", "/talk"));
 
     ros::spinOnce();
 

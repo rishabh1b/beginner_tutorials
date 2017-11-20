@@ -1,0 +1,34 @@
+~/808XHw/ROSweek1/catkin_ws/build$ make run_tests
+Removing test result files from '/home/viki/808XHw/ROSweek1/catkin_ws/build/test_results/beginner_tutorials'
+- removing '/home/viki/808XHw/ROSweek1/catkin_ws/build/test_results/beginner_tutorials/rosunit-string_replace_testing.xml'
+- removing '/home/viki/808XHw/ROSweek1/catkin_ws/build/test_results/beginner_tutorials/rostest-test_stringreplace.xml'
+[  0%] Built target clean_test_results_beginner_tutorials
+[ 50%] Built target gtest
+Scanning dependencies of target string_replace_testing
+[ 75%] Building CXX object beginner_tutorials/CMakeFiles/string_replace_testing.dir/src/test/test_string_service.cpp.o
+[100%] Linking CXX executable /home/viki/808XHw/ROSweek1/catkin_ws/devel/lib/beginner_tutorials/string_replace_testing
+[100%] Built target string_replace_testing
+[100%] Built target tests
+-- run_tests.py: execute commands
+  /opt/ros/kinetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/home/viki/808XHw/ROSweek1/catkin_ws/src/beginner_tutorials --package=beginner_tutorials --results-filename test_stringreplace.xml --results-base-dir /home/viki/808XHw/ROSweek1/catkin_ws/build/test_results /home/viki/808XHw/ROSweek1/catkin_ws/src/beginner_tutorials/test/stringreplace.test 
+... logging to /home/viki/.ros/log/rostest-ubuntu-5366.log
+[ROSUNIT] Outputting test results to /home/viki/808XHw/ROSweek1/catkin_ws/build/test_results/beginner_tutorials/rostest-test_stringreplace.xml
+teststring_replace_testing ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[beginner_tutorials.rosunit-string_replace_testing/changeString][passed]
+
+SUMMARY
+ * RESULT: SUCCESS
+ * TESTS: 1
+ * ERRORS: 0
+ * FAILURES: 0
+
+rostest log file is in /home/viki/.ros/log/rostest-ubuntu-5366.log
+-- run_tests.py: verify result "/home/viki/808XHw/ROSweek1/catkin_ws/build/test_results/beginner_tutorials/rostest-test_stringreplace.xml"
+[100%] Built target _run_tests_beginner_tutorials_rostest_test_stringreplace.test
+[100%] Built target _run_tests_beginner_tutorials_rostest
+[100%] Built target _run_tests_beginner_tutorials
+[100%] Built target run_tests
+
